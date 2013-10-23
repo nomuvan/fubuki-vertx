@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+version = '1.0'
+
+def jdkVersion = 1.6
+def enc = 'UTF-8'
+
+sourceCompatibility = jdkVersion
+targetCompatibility = jdkVersion
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Fubuki Virt.x', 'Implementation-Version': version
+    }
+}
+
+configurations {
+  provided
+}
+
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+  provided "io.vertx:vertx-core:2+"
+  provided "io.vertx:vertx-platform:2+"
+  testCompile 'junit:junit:4.+'
+}
